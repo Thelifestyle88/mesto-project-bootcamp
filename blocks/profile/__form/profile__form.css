@@ -1,0 +1,20 @@
+.profile__form {
+    background-color: white;
+    display: flex;
+    margin: 195px auto 0;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 30px;
+    max-width: 430px;
+    color: black;
+    z-index: 2;
+    border-radius: 10px;
+    position: relative;
+}
+
+@media screen and (max-width: 525px) {
+    .profile__form { 
+     margin: 123px auto 0;
+     max-width: 282px;
+ }
+ }
