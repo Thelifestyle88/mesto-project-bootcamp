@@ -1,22 +1,23 @@
-.profile__form-submit {
+.popup__form-submit {
     width: 81.8%;
     background: black;
     color: white;
     height: 50px;
     font-size: 18px;
     line-height: 21.78px;
+    border: none;
     cursor: pointer;
     margin-bottom: 37px;
     border-radius: 2px;
     transition: opacity 1s ease-in-out;
 }
 
-.profile__form-submit:hover {
+.popup__form-submit:hover {
     opacity: .8;
 }
 
 @media screen and (max-width: 525px) {
-    .profile__form-submit {
+    .popup__form-submit {
     font-size: 14px;
     line-height: 16.94px;
  }

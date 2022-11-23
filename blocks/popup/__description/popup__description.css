@@ -1,0 +1,6 @@
+.popup__description {
+    margin: 0;
+    padding: 0;
+    color: white;
+    justify-self: flex-end;
+}

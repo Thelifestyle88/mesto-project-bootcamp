@@ -13,88 +13,66 @@
     <header class="header">
         <img class="header__logo" src="./images/Vector.svg" alt="Логотип">
     </header>
-    <div class="profile__form-container">
-        <form class="profile__form" action="" method="post">
-            <h3 class="profile__form-title">Редактировать профиль</h3>
-            <input class="profile__form-input form-input_name" type="text">
-            <input class="profile__form-input form-input_description" type="text">
-            <input class="profile__form-submit" type="button" value="Сохранить">
-            <button class="profile__form-close"><img src="./images/Close Icon.svg" alt="Закрыть"></button>
-        </form>
-    </div>
     <main class="content">
         <section class="profile">
-            <img class="profile__avatar" src="./images/Жак Кусто.jpg" alt="Жак-Ив Кусто">
+            <img class="profile__avatar" src="./images/Жак-Кусто.jpg" alt="Жак-Ив Кусто">
             <div class="profile__info">
-                <h2 class="profile__title">Жак-Ив Кусто</h2>
+                <h1 class="profile__title">Жак-Ив Кусто</h1>
                 <p class="profile__subtitle">Исследователь океана</p>
-                <button class="profile__edit-button"><img class="profile__edit-button-foto" src="./images/ручка.svg"
-                        alt="редактировать">
+                <button class="profile__edit-button" type="submit"><img class="profile__edit-button-foto"
+                        src="./images/ручка.svg" alt="редактировать">
                 </button>
             </div>
-            <button class="profile__add-button"><img class="profile__add-button-foto" src="./images/Plus.svg"
-                    alt="добавить"></button>
+            <button class="profile__add-button" type="button"><img class="profile__add-button-foto"
+                    src="./images/Plus.svg" alt="добавить"></button>
         </section>
         <section class="elements">
-            <div class="element">
-                <img class="element__foto" src="./images/Карачаевск.jpg" alt="Карачаевск">
-                <div class="element__subscription">
-                    <h3 class="element__title">Карачаевск</h3>
-                    <button class="element__like" src="" alt=""><img class="element__like-foto" src="./images/like.svg"
-                            alt="лайк">
-                    </button>
-                </div>
-            </div>
-            <div class="element">
-                <img class="element__foto" src="./images/Эльбрус.jpg" alt="Эльбрус">
-                <div class="element__subscription">
-                    <h3 class="element__title">Гора Эльбрус</h3>
-                    <button class="element__like" src="" alt=""><img class="element__like-foto" src="./images/like.svg"
-                            alt="лайк">
-                    </button>
-                </div>
-            </div>
-            <div class=" element">
-                <img class="element__foto" src="./images/Домбай.jpg" alt="Домбай">
-                <div class="element__subscription">
-                    <h3 class="element__title">Домбай</h3>
-                    <button class="element__like" src="" alt=""><img class="element__like-foto" src="./images/like.svg"
-                            alt="лайк">
-                    </button>
-                </div>
-            </div>
-            <div class=" element">
-                <img class="element__foto" src="./images/Эльбрус.jpg" alt="Эльбрус">
-                <div class="element__subscription">
-                    <h3 class="element__title">Гора Эльбрус</h3>
-                    <button class="element__like" src="" alt=""><img class="element__like-foto" src="./images/like.svg"
-                            alt="лайк">
-                    </button>
-                </div>
-            </div>
-            <div class=" element">
-                <img class="element__foto" src="./images/Домбай.jpg" alt="Домбай">
-                <div class="element__subscription">
-                    <h3 class="element__title">Домбай</h3>
-                    <button class="element__like" src="" alt=""><img class="element__like-foto" src="./images/like.svg"
-                            alt="лайк">
-                    </button>
-                </div>
-            </div>
-            <div class=" element">
-                <img class="element__foto" src="./images/Карачаевск.jpg" alt="Карачаевск">
-                <div class="element__subscription">
-                    <h3 class="element__title">Карачаево-Черкессия</h3>
-                    <button class="element__like" src="" alt=""><img class="element__like-foto" src="./images/like.svg"
-                            alt="лайк">
-                    </button>
-                </div>
-            </div>
         </section>
     </main>
     <footer class=" footer">
         <h3 class="footer__title">&copy; 2020 Mesto Russia</h3>
     </footer>
+    <div class="popup popup_profile_edit">
+        <button class="popup__button-close" type="button"><img class="popup__button-close-image"
+                src="./images/Close-Icon.svg" alt="Закрыть"></button>
+        <form class="popup__form" name="edit-form" action="#" method="post">
+            <h3 class="popup__form-title">Редактировать профиль</h3>
+            <input class="popup__form-input popup__form-input-title" type="text">
+            <input class="popup__form-input popup__form-input-subtitle" type="text">
+            <input class="popup__form-submit" type="submit" value="Сохранить">
+        </form>
+    </div>
+    <div class="popup popup_new-place">
+        <button class="popup__button-close" type="button"><img class="popup__button-close-image"
+                src="./images/Close-Icon.svg" alt="Закрыть"></button>
+        <form class="popup__form" name="edit-form" action="#" method="post">
+            <h3 class="popup__form-title">Новое место</h3>
+            <input placeholder="Название" class="popup__form-input popup__form-input-title" type="text">
+            <input placeholder="Ссылка на картинку" class="popup__form-input popup__form-input-subtitle" type="url">
+            <input class="popup__form-submit" type="submit" value="Создать">
+        </form>
+    </div>
+    <div class="popup popup_image">
+        <button class="popup__button-close popup__button-close_foto" type="button"><img
+                class="popup__button-close-image" src="./images/Close-Icon.svg" alt="Закрыть"></button>
+        <div class="popup__element-image">
+            <img class="popup__foto"
+                src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg" alt="">
+            <p class="popup__description"></p>
+            </dic>
+        </div>
+        <template id="element">
+            <div class=" element">
+                <button type="button" class="element__trash"><img class="element__trash-image" src="./images/Trash.svg"
+                        alt="удалить"></button>
+                <img class="element__foto" src="#" alt="Фото места...">
+                <div class="element__subscription">
+                    <h3 class="element__title"></h3>
+                    <button class="element__like" type="button"></button>
+                </div>
+            </div>
+        </template>
+        <script src="./js/index.js"></script>
 </body>
 
 </html>

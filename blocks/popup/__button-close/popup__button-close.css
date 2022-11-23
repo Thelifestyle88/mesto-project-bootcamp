@@ -1,0 +1,28 @@
+.popup__button-close {
+    margin: 0 0 0 calc(35% + 30px);
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    width: 32px;
+    height: 32px;
+    border: none;
+    transition: opacity 1s ease-in-out;
+}
+
+.popup__button-close:hover {
+    opacity: .6;
+}
+
+@media screen and (max-width: 925px) {
+    .popup__button-close {
+    margin: 0 0 0 calc(40% + 30px);
+ }
+ }
+
+@media screen and (max-width: 525px) {
+    .popup__button-close {
+    width: 20px;
+    height: 20px;
+    margin: 0 0 16px calc(88.12% - 30px);
+ }
+ }
