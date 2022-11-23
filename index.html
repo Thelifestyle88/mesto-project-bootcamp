@@ -37,9 +37,9 @@
                 src="./images/Close-Icon.svg" alt="Закрыть"></button>
         <form class="popup__form" name="edit-form" action="#" method="post">
             <h3 class="popup__form-title">Редактировать профиль</h3>
-            <input class="popup__form-input popup__form-input-title" type="text">
-            <input class="popup__form-input popup__form-input-subtitle" type="text">
-            <input class="popup__form-submit" type="submit" value="Сохранить">
+            <input class="popup__form-input popup__form-input_edit-title" type="text">
+            <input class="popup__form-input popup__form-input_edit_subtitle" type="text">
+            <button class="popup__form-submit popup__form-submit-save" type="submit">Сохранить</button>
         </form>
     </div>
     <div class="popup popup_new-place">
@@ -47,9 +47,10 @@
                 src="./images/Close-Icon.svg" alt="Закрыть"></button>
         <form class="popup__form" name="edit-form" action="#" method="post">
             <h3 class="popup__form-title">Новое место</h3>
-            <input placeholder="Название" class="popup__form-input popup__form-input-title" type="text">
-            <input placeholder="Ссылка на картинку" class="popup__form-input popup__form-input-subtitle" type="url">
-            <input class="popup__form-submit" type="submit" value="Создать">
+            <input placeholder="Название" class="popup__form-input popup__form-input_place-title" type="text">
+            <input placeholder="Ссылка на картинку" class="popup__form-input popup__form-input_place-subtitle"
+                type="url">
+            <button class="popup__form-submit popup__form-submit-create" type="submit">Создать</button>
         </form>
     </div>
     <div class="popup popup_image">
@@ -73,6 +74,7 @@
             </div>
         </template>
         <script src="./js/index.js"></script>
+        <script src="./js/createCards.js"></script>
 </body>
 
 </html>

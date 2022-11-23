@@ -1,8 +1,11 @@
-const formTitleInput = document.querySelectorAll('.popup__form-input-title');
-const formSubTitleInput = document.querySelectorAll('.popup__form-input-subtitle');
+const editFormTitleInput = document.querySelector('.popup__form-input_edit-title');
+const editFormSubTitleInput = document.querySelector('.popup__form-input_edit_subtitle');
+const placeFormTitleInput = document.querySelector('.popup__form-input_place-title');
+const placeFormSubTitleInput = document.querySelector('.popup__form-input_place-subtitle');
 const profileEditButton = document.querySelector('.profile__edit-button');
-const popupCloseButton = document.querySelectorAll('.popup__button-close')
-const popupSubmitButton = document.querySelectorAll('.popup__form-submit');
+const popupCloseButtons = document.querySelectorAll('.popup__button-close')
+const popupSaveButton = document.querySelector('.popup__form-submit-save');
+const popupCreateButton = document.querySelector('.popup__form-submit-create');
 const popupProfileEdit = document.querySelector('.popup_profile_edit');
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
@@ -13,7 +16,8 @@ const popupFoto = document.querySelector('.popup__foto')
 const popupDescription = document.querySelector('.popup__description')
 const elements = document.querySelector('.elements')
 const element = document.querySelector('#element').content
-let initialCards = [
+const elementTitle = document.querySelector('.element__title')
+const initialCards = [
     {
         name: 'Архыз',
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -40,11 +44,6 @@ let initialCards = [
     }
 ];
 
-createCard(initialCards)
-let likeButton = document.querySelectorAll('.element__like')
-let trashButton = document.querySelectorAll('.element__trash')
-
-
 function openPopup(popup) {
     popup.classList.add('popup_opened')
 }
@@ -53,98 +52,62 @@ function closePopup(popup) {
     popup.classList.remove('popup_opened')
 }
 
-popupCloseButton.forEach((elem) => {
+popupCloseButtons.forEach((elem) => {
     elem.addEventListener('click', function () {
         popup = elem.parentNode
         closePopup(popup)
     })
 })
 
-function getForm() {
-    let currentTitle = document.querySelector('.popup_opened').childNodes[3][0]
-    let currentSubtitle = document.querySelector('.popup_opened').childNodes[3][1]
-    currentTitle.value = profileTitle.textContent
-    currentSubtitle.value = profileSubtitle.textContent
-}
-
-function submitForm() {
-    let currentTitle = document.querySelector('.popup_opened').childNodes[3][0]
-    let currentSubtitle = document.querySelector('.popup_opened').childNodes[3][1]
-    profileTitle.textContent = currentTitle.value
-    profileSubtitle.textContent = currentSubtitle.value
-}
-
 profileEditButton.addEventListener('click', function () {
     openPopup(popupProfileEdit)
-    getForm()
+    editFormTitleInput.value = profileTitle.textContent
+    editFormSubTitleInput.value = profileSubtitle.textContent
 });
 
 newPlaceButton.addEventListener('click', function () {
     openPopup(popupNewPlace)
 })
-
-popupSubmitButton.forEach(elem => {
-    elem.addEventListener('click', function (e) {
-        if (elem.parentNode.parentNode.classList.value === 'popup popup_profile_edit popup_opened') {
-            submitForm()
-            e.preventDefault()
-            closePopup(popupProfileEdit)
-        }
-        else if (elem.parentNode.parentNode.classList.value === 'popup popup_new-place popup_opened') {
-            addCard()
-            createCard(initialCards)
-            e.preventDefault()
-            closePopup(popupNewPlace)
-        }
-        e.preventDefault()
-    })
+popupSaveButton.addEventListener('click', function (e) {
+    profileTitle.textContent = editFormTitleInput.value
+    profileSubtitle.textContent = editFormSubTitleInput.value
+    e.preventDefault()
+    closePopup(popupProfileEdit)
 })
 
-function addCard() {
-    let currentTitle = document.querySelector('.popup_opened').childNodes[3][0]
-    let currentSubtitle = document.querySelector('.popup_opened').childNodes[3][1]
-    initialCards.push({
-        name: currentTitle.value,
-        link: currentSubtitle.value
-    }
-    )
-    console.log(initialCards)
-}
-
-function createCard(initialCards) {
-    initialCards.forEach((elem) => {
-        const elementPlace = element.querySelector('.element').cloneNode(true)
-        elementPlace.querySelector('.element__foto').src = elem.link
-        elementPlace.querySelector('.element__title').textContent = elem.name
-        elements.prepend(elementPlace)
-    })
-}
-
-likeButton.forEach(elem => {
-    elem.addEventListener('click', function (el) {
+function createCards(elementName, elementSource) {
+    const card = element.querySelector('.element').cloneNode(true)
+    card.querySelector('.element__title').textContent = elementName
+    card.querySelector('.element__foto').src = elementSource
+    card.querySelector('.element__foto').alt = elementName
+    const likeButton = card.querySelector('.element__like')
+    const trashButton = card.querySelector('.element__trash')
+    const elementFoto = card.querySelector('.element__foto')
+    likeButton.addEventListener('click', function (el) {
         el.target.classList.toggle('element__like_black')
     })
-})
-
-trashButton.forEach(elem => {
-    elem.addEventListener('click', function () {
-        elem.parentNode.remove()
+    trashButton.addEventListener('click', function (element) {
+        element.target.parentNode.parentNode.remove()
     })
-})
-
-
-let currentElements = document.querySelectorAll('.element')
-currentElements.forEach(elem => {
-    elem.addEventListener('click', function () {
-        popupDescription.textContent = elem.textContent
-    })
-})
-let elementFoto = document.querySelectorAll('.element__foto')
-elementFoto.forEach(elem => {
-    elem.addEventListener('click', function () {
-        popupFoto.src = elem.src
+    elementFoto.addEventListener('click', function (elem) {
+        popupFoto.src = elem.target.src
+        popupFoto.alt = elem.target.alt
+        popupDescription.textContent = elem.target.alt
         openPopup(popupImage)
     })
+    elements.prepend(card)
+}
+
+popupCreateButton.addEventListener('click', function (e) {
+    let name = placeFormTitleInput.value
+    let source = placeFormSubTitleInput.value
+    createCards(name, source)
+    e.preventDefault()
+    closePopup(popupNewPlace)
 })
 
-
+initialCards.forEach(elem => {
+    const name = elem.name
+    const link = elem.link
+    createCards(name, link)
+})
