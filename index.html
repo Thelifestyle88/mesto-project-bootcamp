@@ -6,25 +6,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto Russia</title>
-    <link rel="stylesheet" href="pages/index.css">
 </head>
 
 <body class="page">
     <header class="header">
-        <img class="header__logo" src="./images/Vector.svg" alt="Логотип">
+        <img class="header__logo" src="<%=require('./images/Vector.svg')%>" alt="Логотип">
     </header>
     <main class="content">
         <section class="profile">
-            <img class="profile__avatar" src="./images/Жак-Кусто.jpg" alt="Жак-Ив Кусто">
+            <img class="profile__avatar" src="<%=require('./images/Жак-Кусто.jpg')%>" alt="Жак-Ив Кусто">
             <div class="profile__info">
                 <h1 class="profile__title">Жак-Ив Кусто</h1>
                 <p class="profile__subtitle">Исследователь океана</p>
                 <button class="profile__edit-button" type="submit"><img class="profile__edit-button-foto"
-                        src="./images/ручка.svg" alt="редактировать">
+                        src="<%=require('./images/ручка.svg')%>" alt="редактировать">
                 </button>
             </div>
             <button class="profile__add-button" type="button"><img class="profile__add-button-foto"
-                    src="./images/Plus.svg" alt="добавить"></button>
+                    src="<%=require('./images/Plus.svg')%>" alt="добавить"></button>
         </section>
         <section class="elements">
         </section>
@@ -34,47 +33,52 @@
     </footer>
     <div class="popup popup_profile_edit">
         <button class="popup__button-close" type="button"><img class="popup__button-close-image"
-                src="./images/Close-Icon.svg" alt="Закрыть"></button>
-        <form class="popup__form" name="edit-form" action="#" method="post">
+                src="<%=require('./images/Close-Icon.svg')%>" alt="Закрыть"></button>
+        <form class="popup__form" name="edit-form" action="#" method="post" novalidate>
             <h3 class="popup__form-title">Редактировать профиль</h3>
-            <input class="popup__form-input popup__form-input_edit-title" type="text">
-            <input class="popup__form-input popup__form-input_edit_subtitle" type="text">
+            <input id="edit-title" class="popup__form-input popup__form-input_edit-title" type="text" minlength="2"
+                maxlength="40" required>
+            <span class="edit-title-error popup__form-error"></span>
+            <input id="edit-subtitle" class="popup__form-input popup__form-input_edit_subtitle" type="text"
+                minlength="2" maxlength="200" required>
+            <span class="edit-subtitle-error popup__form-error"></span>
             <button class="popup__form-submit popup__form-submit-save" type="submit">Сохранить</button>
         </form>
     </div>
     <div class="popup popup_new-place">
         <button class="popup__button-close" type="button"><img class="popup__button-close-image"
-                src="./images/Close-Icon.svg" alt="Закрыть"></button>
-        <form class="popup__form" name="edit-form" action="#" method="post">
+                src="<%=require('./images/Close-Icon.svg')%>" alt="Закрыть"></button>
+        <form class="popup__form" name="edit-form" action="#" method="post" novalidate>
             <h3 class="popup__form-title">Новое место</h3>
-            <input placeholder="Название" class="popup__form-input popup__form-input_place-title" type="text">
-            <input placeholder="Ссылка на картинку" class="popup__form-input popup__form-input_place-subtitle"
-                type="url">
+            <input id="edit-title" placeholder="Название" class="popup__form-input popup__form-input_place-title"
+                type="text" minlength="2" maxlength="30" required>
+            <span class="edit-title-error popup__form-error"></span>
+            <input id="edit-subtitle" placeholder="Ссылка на картинку"
+                class="popup__form-input popup__form-input_place-subtitle" type="url" required>
+            <span class="edit-subtitle-error popup__form-error"></span>
             <button class="popup__form-submit popup__form-submit-create" type="submit">Создать</button>
         </form>
     </div>
     <div class="popup popup_image">
-        <button class="popup__button-close popup__button-close_foto" type="button"><img
-                class="popup__button-close-image" src="./images/Close-Icon.svg" alt="Закрыть"></button>
         <div class="popup__element-image">
-            <img class="popup__foto"
-                src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg" alt="">
+            <button class="popup__button-close popup__button-close_foto" type="button"><img
+                    class="popup__button-close-image" src="<%=require('./images/Close-Icon.svg')%>"
+                    alt="Закрыть"></button>
+            <img class="popup__foto" src="" alt="">
             <p class="popup__description"></p>
-            </dic>
         </div>
-        <template id="element">
-            <div class=" element">
-                <button type="button" class="element__trash"><img class="element__trash-image" src="./images/Trash.svg"
-                        alt="удалить"></button>
-                <img class="element__foto" src="#" alt="Фото места...">
-                <div class="element__subscription">
-                    <h3 class="element__title"></h3>
-                    <button class="element__like" type="button"></button>
-                </div>
+    </div>
+    <template id="element">
+        <div class="element">
+            <button type="button" class="element__trash"><img class="element__trash-image"
+                    src="<%=require('./images/Trash.svg')%>" alt="удалить"></button>
+            <img class="element__foto" src="#" alt="Фото места...">
+            <div class="element__subscription">
+                <h3 class="element__title"></h3>
+                <button class="element__like" type="button"></button>
             </div>
-        </template>
-        <script src="./js/index.js"></script>
-        <script src="./js/createCards.js"></script>
+        </div>
+    </template>
 </body>
 
 </html>

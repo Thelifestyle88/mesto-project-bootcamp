@@ -6,6 +6,7 @@
     "subtitle .";
     column-gap: 18px;
     row-gap: 16px;
+    max-width: 100%;
 }
 
 @media screen and (max-width: 950px) {

@@ -6,4 +6,5 @@
     width: fit-content;
     color: black;
     z-index: 2;
+    position: relative;
 }
