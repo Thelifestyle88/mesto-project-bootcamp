@@ -1,0 +1,8 @@
+.popup__question {
+    align-self: flex-start;
+    margin: 34px 0 38px 36px;
+    padding: 0;
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 29.05px;
+}

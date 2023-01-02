@@ -14,10 +14,10 @@
     </header>
     <main class="content">
         <section class="profile">
-            <img class="profile__avatar" src="<%=require('./images/Жак-Кусто.jpg')%>" alt="Жак-Ив Кусто">
+            <div class="profile__avatar"><img class="profile__image" src="" alt="Жак-Ив Кусто"></div>
             <div class="profile__info">
-                <h1 class="profile__title">Жак-Ив Кусто</h1>
-                <p class="profile__subtitle">Исследователь океана</p>
+                <h1 class="profile__title"></h1>
+                <p class="profile__subtitle"></p>
                 <button class="profile__edit-button" type="submit"><img class="profile__edit-button-foto"
                         src="<%=require('./images/ручка.svg')%>" alt="редактировать">
                 </button>
@@ -34,7 +34,7 @@
     <div class="popup popup_profile_edit">
         <button class="popup__button-close" type="button"><img class="popup__button-close-image"
                 src="<%=require('./images/Close-Icon.svg')%>" alt="Закрыть"></button>
-        <form class="popup__form" name="edit-form" action="#" method="post" novalidate>
+        <form class="popup__form popup__form_edit" name="edit-form" action="#" method="post" novalidate>
             <h3 class="popup__form-title">Редактировать профиль</h3>
             <input id="edit-title" class="popup__form-input popup__form-input_edit-title" type="text" minlength="2"
                 maxlength="40" required>
@@ -48,7 +48,7 @@
     <div class="popup popup_new-place">
         <button class="popup__button-close" type="button"><img class="popup__button-close-image"
                 src="<%=require('./images/Close-Icon.svg')%>" alt="Закрыть"></button>
-        <form class="popup__form" name="edit-form" action="#" method="post" novalidate>
+        <form class="popup__form popup__form_create" name="edit-form" action="#" method="post" novalidate>
             <h3 class="popup__form-title">Новое место</h3>
             <input id="edit-title" placeholder="Название" class="popup__form-input popup__form-input_place-title"
                 type="text" minlength="2" maxlength="30" required>
@@ -57,6 +57,16 @@
                 class="popup__form-input popup__form-input_place-subtitle" type="url" required>
             <span class="edit-subtitle-error popup__form-error"></span>
             <button class="popup__form-submit popup__form-submit-create" type="submit">Создать</button>
+        </form>
+    </div>
+    <div class="popup popup_avatar_edit">
+        <button class="popup__button-close" type="button"><img class="popup__button-close-image"
+                src="<%=require('./images/Close-Icon.svg')%>" alt="Закрыть"></button>
+        <form class="popup__form popup__avatar_form" name="edit-form" action="#" method="post" novalidate>
+            <h3 class="popup__form-title">Обновить аватар</h3>
+            <input id="edit-avatar" class="popup__form-input popup__form-input_edit_avatar" type="url" required>
+            <span class="edit-avatar-error popup__form-error"></span>
+            <button class="popup__form-submit popup__form-submit-avatar" type="submit">Сохранить</button>
         </form>
     </div>
     <div class="popup popup_image">
@@ -68,14 +78,25 @@
             <p class="popup__description"></p>
         </div>
     </div>
+    <div class="popup popup_delete">
+        <button class="popup__button-close popup__button-close_delete" type="button"><img
+                class="popup__button-close-image" src="<%=require('./images/Close-Icon.svg')%>" alt="Закрыть"></button>
+        <form class="popup__form popup__form_delete" action="#" method="post" novalidate>
+            <h3 class="popup__question">Вы уверены?</h3>
+            <button class="popup__form-submit popup__form-submit-delete" type="submit">Да</button>
+        </form>
+    </div>
     <template id="element">
         <div class="element">
             <button type="button" class="element__trash"><img class="element__trash-image"
                     src="<%=require('./images/Trash.svg')%>" alt="удалить"></button>
-            <img class="element__foto" src="#" alt="Фото места...">
+            <img class="element__foto" src="" alt="Фото места...">
             <div class="element__subscription">
                 <h3 class="element__title"></h3>
-                <button class="element__like" type="button"></button>
+                <div class="element__likes">
+                    <button class="element__like" type="button"></button>
+                    <span class="element__likes-count">0</span>
+                </div>
             </div>
         </div>
     </template>

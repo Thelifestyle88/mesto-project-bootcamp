@@ -1,3 +1,7 @@
+const popupCreateForm = document.querySelector('.popup__form_create')
+const popupFormError = document.querySelector('.popup__form-error')
+const popupEditForm = document.querySelector('.popup__form_edit')
+
 export function showInputError(formElement, inputElem, errMessage) {
     const errorElement = formElement.querySelector(`.${inputElem.id}-error`);
     inputElem.classList.add('popup__form-input_error');
@@ -52,4 +56,11 @@ export function setEventListeners(formElement) {
             toggleButtonState(inputList, buttonElement)
         })
     })
+}
+
+
+export function resetEditForm() {
+    popupEditForm.reset()
+    popupCreateForm.reset()
+    popupFormError.textContent = ''
 }
