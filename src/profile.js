@@ -1,5 +1,3 @@
-import { openPopup } from "./modal";
-
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 const profileAvatar = document.querySelector('.profile__image')

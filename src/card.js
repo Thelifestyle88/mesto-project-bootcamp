@@ -57,9 +57,6 @@ export function makeCard(cardObj, user_id) {
         }
     })
     trashButton.addEventListener('click', handleDeleteClick)
-
-    const isLiked = cardObj.likes.map((item) => item._id).includes('362fa7fb4176231c9cf4f10d')
-
     likeButton.addEventListener('click', handleLikeClick)
     elementPhoto.addEventListener('click', handleImageClick)
     return card

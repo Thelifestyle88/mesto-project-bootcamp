@@ -1,4 +1,4 @@
-import { activeValid } from "./validate";
+import { activeValid, resetEditForm } from "./validate";
 import { addCard } from "./card";
 import { getProfileData, setUserData } from "./profile";
 import { editProfile, changeAvatar, cardDelete } from "./api";
@@ -98,6 +98,7 @@ export function openDeleteCardConfirm() {
 
 export function openEditAvatar() {
     cleanAvatarForm()
+    resetEditForm(avatarForm)
     openPopup(avatarPopup)
 }
 
@@ -137,6 +138,7 @@ function setProfileInputs(user) {
 
 export function openEditProfilePopup() {
     setProfileInputs(getProfileData())
+    resetEditForm(profileEditForm)
     openPopup(popupProfileEdit)
 }
 
@@ -163,7 +165,7 @@ function handleProfileAvatar(evt) {
 
 export function openNewPlacePopup() {
     cleanNewPlaceForm()
-    activeValid()
+    resetEditForm(newPlaceForm)
     openPopup(popupNewPlace)
 }
 
