@@ -1,8 +1,7 @@
-import { cardDelete, toggleLike, uploadCard } from './api.js';
-import { openPopup, closePopup, openViewModal } from './modal.js'
+import { toggleLike, uploadCard } from './api.js';
+import { openViewModal, openDeleteCardConfirm } from './modal.js'
 import { addCardToContainer } from './container.js';
-const deleteButton = document.querySelector('.popup__form-submit-delete')
-const popupDelete = document.querySelector('.popup_delete')
+
 const element = document.querySelector('#element').content
 
 function handleImageClick(evt) {
@@ -24,8 +23,14 @@ function handleLikeClick(evt) {
                 evt.target.classList.remove('element__like_black')
             }
         })
-
 }
+
+function handleDeleteClick(evt) {
+    const card = evt.target.closest('.element')
+    sessionStorage.setItem('id-to-delete', card._id)
+    openDeleteCardConfirm()
+}
+
 
 export function makeCard(cardObj, user_id) {
     const card = element.querySelector('.element').cloneNode(true)
@@ -50,17 +55,7 @@ export function makeCard(cardObj, user_id) {
             likeButton.classList.add('element__like_black')
         }
     })
-    trashButton.addEventListener('click', function (element) {
-        openPopup(popupDelete)
-        element.preventDefault()
-        const currentCard = element.target.closest('.element')
-        deleteButton.addEventListener('click', function (e) {
-            e.preventDefault()
-            currentCard.remove()
-            cardDelete(cardId)
-            closePopup(popupDelete)
-        })
-    })
+    trashButton.addEventListener('click', handleDeleteClick)
 
     const isLiked = cardObj.likes.map((item) => item._id).includes('362fa7fb4176231c9cf4f10d')
 

@@ -1,3 +1,10 @@
+const config = {
+    baseUrl: 'https://nomoreparties.co/v1/wbf-cohort-3/',
+    header: {
+        authorization: '9035a3ae-3144-4c5d-a2fb-c77d4c0cdff6'
+    }
+}
+
 function checkResponse(res) {
     if (res.ok) {
         return res.json();
@@ -11,11 +18,9 @@ function checkResponse(res) {
 
 
 export function getProfile() {
-    return fetch('https://nomoreparties.co/v1/wbf-cohort-3/users/me', {
+    return fetch(`${config.baseUrl}users/me`, {
         method: 'GET',
-        headers: {
-            authorization: '9035a3ae-3144-4c5d-a2fb-c77d4c0cdff6'
-        }
+        headers: config.header
 
     })
         .then(checkResponse)
@@ -23,18 +28,16 @@ export function getProfile() {
 
 
 export function toggleLike(cardId, isLiked) {
-    return fetch(`https://nomoreparties.co/v1/wbf-cohort-3/cards/likes/${cardId}`, {
+    return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
         method: isLiked ? 'DELETE' : 'PUT',
-        headers: {
-            authorization: '9035a3ae-3144-4c5d-a2fb-c77d4c0cdff6'
-        }
+        headers: config.header
     })
         .then(checkResponse)
 }
 
 
 export function uploadCard(card) {
-    return fetch('https://nomoreparties.co/v1/wbf-cohort-3/cards', {
+    return fetch(`${config.baseUrl}/cards`, {
         method: 'POST',
         headers: {
             authorization: '9035a3ae-3144-4c5d-a2fb-c77d4c0cdff6',
@@ -49,7 +52,7 @@ export function uploadCard(card) {
 }
 
 export function editProfile(profile) {
-    return fetch('https://nomoreparties.co/v1/wbf-cohort-3/users/me', {
+    return fetch(`${config.baseUrl}users/me`, {
         method: 'PATCH',
         headers: {
             authorization: '9035a3ae-3144-4c5d-a2fb-c77d4c0cdff6',
@@ -64,34 +67,28 @@ export function editProfile(profile) {
 }
 
 export function getCards() {
-    return fetch('https://nomoreparties.co/v1/wbf-cohort-3/cards', {
+    return fetch(`${config.baseUrl}cards`, {
         method: 'GET',
-        headers: {
-            authorization: '9035a3ae-3144-4c5d-a2fb-c77d4c0cdff6'
-        }
-
+        headers: config.header
     })
         .then(checkResponse)
 }
 
 export function cardDelete(cardId) {
 
-    return fetch(`https://nomoreparties.co/v1/wbf-cohort-3/cards/${cardId}`, {
+    return fetch(`${config.baseUrl}cards/${cardId}`, {
         method: 'DELETE',
-        headers: {
-            authorization: '9035a3ae-3144-4c5d-a2fb-c77d4c0cdff6'
-        }
-
+        headers: config.header
     })
         .then(checkResponse)
 }
 
 export function changeAvatar(link) {
-
-    return fetch('https://nomoreparties.co/v1/wbf-cohort-3/users/me/avatar', {
+    return fetch(`${config.baseUrl}users/me/avatar`, {
         method: 'PATCH',
         headers: {
-            authorization: '9035a3ae-3144-4c5d-a2fb-c77d4c0cdff6'
+            authorization: '9035a3ae-3144-4c5d-a2fb-c77d4c0cdff6',
+            "Content-Type": "application/json",
         },
         body: JSON.stringify({
             avatar: `${link}`
