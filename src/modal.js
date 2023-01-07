@@ -20,6 +20,9 @@ const avatarInput = document.querySelector('.popup__form-input_edit_avatar')
 const avatarPopup = document.querySelector('.popup_avatar_edit')
 const popupConfirmDelete = document.querySelector('.popup_delete')
 const deleteForm = document.querySelector('.popup__form_delete')
+const profileSaveButton = document.querySelector('.popup__form-submit-save')
+const avatarSaveButton = document.querySelector('.popup__form-submit-avatar')
+const cardSaveButton = document.querySelector('.popup__form-submit-create')
 
 export function openPopup(popup) {
     popup.classList.add('popup_opened')
@@ -40,6 +43,18 @@ function handleOverlayClick(evt) {
 function handleCloseClick(elem) {
     const popup = elem.target.closest('.popup')
     closePopup(popup)
+}
+
+function saveTextProfile() {
+    profileSaveButton.textContent = 'Сохранение...'
+}
+
+function saveTextAvatar() {
+    avatarSaveButton.textContent = 'Сохранение...'
+}
+
+function saveTextCard() {
+    cardSaveButton.textContent = 'Создание...'
 }
 
 function handleEscClick(evt) {
@@ -127,17 +142,21 @@ export function openEditProfilePopup() {
 
 function handleProfileSubmit(evt) {
     evt.preventDefault()
+    saveTextProfile()
     editProfile(getNewProfileData())
         .then((profile) => {
             setUserData(profile)
         })
+        .finally(() => profileSaveButton.textContent = 'Сохранить')
     closePopup(popupProfileEdit)
 }
 
 function handleProfileAvatar(evt) {
     evt.preventDefault()
+    saveTextAvatar()
     changeAvatar(getAvatar())
         .then(profile => setUserData(profile))
+        .finally(() => avatarSaveButton.textContent = 'Сохранить')
     cleanAvatarForm()
     closePopup(avatarPopup)
 }
@@ -150,6 +169,7 @@ export function openNewPlacePopup() {
 
 function handleNewPlaceSubmit(evt) {
     evt.preventDefault()
+    saveTextCard()
     addCard(getNewCardData())
     closePopup(popupNewPlace)
     cleanNewPlaceForm()

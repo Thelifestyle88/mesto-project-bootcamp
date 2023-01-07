@@ -3,6 +3,7 @@ import { openViewModal, openDeleteCardConfirm } from './modal.js'
 import { addCardToContainer } from './container.js';
 
 const element = document.querySelector('#element').content
+const cardSaveButton = document.querySelector('.popup__form-submit-create')
 
 function handleImageClick(evt) {
     const { target: { src, alt } } = evt;
@@ -70,4 +71,5 @@ export function addCard(card) {
         .then((res) => {
             addCardToContainer(makeCard(res, sessionStorage.getItem("userId")))
         })
+        .finally(() => cardSaveButton.textContent = 'Создать')
 }
