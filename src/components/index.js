@@ -1,4 +1,4 @@
-import '../src/pages/index.css';
+import '../pages/index.css';
 import { openNewPlacePopup, setModalsEventListeners, openEditProfilePopup, openEditAvatar } from './modal.js'
 import { enableValidation } from './validate.js'
 import { api } from './api.js';
@@ -18,7 +18,17 @@ Promise.all([api.getProfile(), api.getCards()])
     })
     .catch(console.error);
 
-enableValidation()
+enableValidation({
+    formSelector: '.popup__form',
+    inputSelector: '.popup__form-input',
+    submitButtonSelector: '.popup__form-submit',
+    inputError: 'popup__form-input_error',
+    errorActive: '-error_active',
+    errorInactive: 'popup__form-submit_inactive',
+    error: '-error',
+    cleanString: '',
+    disable: 'disable'
+})
 setModalsEventListeners()
 
 profileEditButton.addEventListener('click', openEditProfilePopup);

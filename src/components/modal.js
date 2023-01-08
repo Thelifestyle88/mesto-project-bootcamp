@@ -89,7 +89,17 @@ export function openDeleteCardConfirm() {
 
 export function openEditAvatar() {
     cleanAvatarForm()
-    resetValidation(avatarForm)
+    resetValidation(avatarForm, {
+        formSelector: '.popup__form',
+        inputSelector: '.popup__form-input',
+        submitButtonSelector: '.popup__form-submit',
+        inputError: 'popup__form-input_error',
+        errorActive: '-error_active',
+        errorInactive: 'popup__form-submit_inactive',
+        error: '-error',
+        cleanString: '',
+        disable: 'disable'
+    })
     openPopup(avatarPopup)
 }
 
@@ -129,7 +139,17 @@ function setProfileInputs(user) {
 
 export function openEditProfilePopup() {
     setProfileInputs(getProfileData())
-    resetValidation(profileEditForm)
+    resetValidation(profileEditForm, {
+        formSelector: '.popup__form',
+        inputSelector: '.popup__form-input',
+        submitButtonSelector: '.popup__form-submit',
+        inputError: 'popup__form-input_error',
+        errorActive: '-error_active',
+        errorInactive: 'popup__form-submit_inactive',
+        error: '-error',
+        cleanString: '',
+        disable: 'disable'
+    })
     openPopup(popupProfileEdit)
 }
 
@@ -160,7 +180,17 @@ function handleProfileAvatar(evt) {
 
 export function openNewPlacePopup() {
     cleanNewPlaceForm()
-    resetValidation(newPlaceForm)
+    resetValidation(newPlaceForm, {
+        formSelector: '.popup__form',
+        inputSelector: '.popup__form-input',
+        submitButtonSelector: '.popup__form-submit',
+        inputError: 'popup__form-input_error',
+        errorActive: '-error_active',
+        errorInactive: 'popup__form-submit_inactive',
+        error: '-error',
+        cleanString: '',
+        disable: 'disable'
+    })
     openPopup(popupNewPlace)
 }
 
