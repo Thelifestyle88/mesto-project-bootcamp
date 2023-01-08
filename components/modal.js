@@ -1,7 +1,7 @@
-import { activeValid, resetEditForm } from "./validate";
+import { resetValidation } from "./validate";
 import { addCard } from "./card";
 import { getProfileData, setUserData } from "./profile";
-import { editProfile, changeAvatar, cardDelete } from "./api";
+import { api } from "./api";
 
 const cardPhoto = document.querySelector('.popup__foto')
 const popupDescription = document.querySelector('.popup__description')
@@ -26,12 +26,12 @@ const cardSaveButton = document.querySelector('.popup__form-submit-create')
 
 export function openPopup(popup) {
     popup.classList.add('popup_opened')
-    document.addEventListener('keyup', handleEscClick);
+    document.addEventListener('keyup', handleEsc);
 }
 
 export function closePopup(popup) {
     popup.classList.remove('popup_opened')
-    document.removeEventListener('keyup', handleEscClick);
+    document.removeEventListener('keyup', handleEsc);
 }
 
 function handleOverlayClick(evt) {
@@ -45,22 +45,14 @@ function handleCloseClick(elem) {
     closePopup(popup)
 }
 
-function saveTextProfile() {
-    profileSaveButton.textContent = 'Сохранение...'
+export function setButtonText(button, buttonText = "Сохранить") {
+    button.textContent = buttonText;
 }
 
-function saveTextAvatar() {
-    avatarSaveButton.textContent = 'Сохранение...'
-}
-
-function saveTextCard() {
-    cardSaveButton.textContent = 'Создание...'
-}
-
-function handleEscClick(evt) {
-    const popupOpened = document.querySelector('.popup_opened')
-    if (evt.key === 'Escape' && popupOpened) {
-        closePopup(popupOpened)
+function handleEsc(evt) {
+    if (evt.key === 'Escape') {
+        const popupOpened = document.querySelector('.popup_opened')
+        popupOpened && closePopup(popupOpened)
     }
 }
 
@@ -73,36 +65,35 @@ export function openViewModal(src, alt) {
 
 function closePopupDeleteCard() {
     closePopup(popupConfirmDelete)
-    sessionStorage.removeItem('id-to-delete');
+    sessionStorage.removeItem('itemToDelete');
 }
 
 
 function handleDeleteSubmitClick(evt) {
     evt.preventDefault()
-    const itemToDelete = sessionStorage.getItem('id-to-delete')
-    const deletedItem = Array.from(document.querySelectorAll('.element')).find(item => {
-        return item._id == itemToDelete
-    })
-    cardDelete(itemToDelete)
+    const itemToDelete = sessionStorage.getItem('itemToDelete')
+    const deletedItem = document.getElementById(itemToDelete)
+    api.cardDelete(itemToDelete)
         .then(() => {
             deletedItem.remove()
+            closePopupDeleteCard()
         })
-    closePopupDeleteCard()
+        .catch(console.error)
 }
 
 export function openDeleteCardConfirm() {
-    if (sessionStorage.getItem('id-to-delete')) {
+    if (sessionStorage.getItem('itemToDelete')) {
         openPopup(popupConfirmDelete)
     }
 }
 
 export function openEditAvatar() {
     cleanAvatarForm()
-    resetEditForm(avatarForm)
+    resetValidation(avatarForm)
     openPopup(avatarPopup)
 }
 
-function cleanNewPlaceForm() {
+export function cleanNewPlaceForm() {
     placeFormTitleInput.value = ''
     placeFormSubTitleInput.value = ''
 }
@@ -138,43 +129,52 @@ function setProfileInputs(user) {
 
 export function openEditProfilePopup() {
     setProfileInputs(getProfileData())
-    resetEditForm(profileEditForm)
+    resetValidation(profileEditForm)
     openPopup(popupProfileEdit)
 }
 
 function handleProfileSubmit(evt) {
     evt.preventDefault()
-    saveTextProfile()
-    editProfile(getNewProfileData())
+    setButtonText(profileSaveButton, 'Cохранение...')
+    api.editProfile(getNewProfileData())
         .then((profile) => {
             setUserData(profile)
+            closePopup(popupProfileEdit)
         })
+        .catch(console.error)
         .finally(() => profileSaveButton.textContent = 'Сохранить')
-    closePopup(popupProfileEdit)
 }
 
 function handleProfileAvatar(evt) {
     evt.preventDefault()
-    saveTextAvatar()
-    changeAvatar(getAvatar())
-        .then(profile => setUserData(profile))
-        .finally(() => avatarSaveButton.textContent = 'Сохранить')
-    cleanAvatarForm()
-    closePopup(avatarPopup)
+    setButtonText(avatarSaveButton, 'Cохранение...')
+    api.changeAvatar(getAvatar())
+        .then(profile => {
+            setUserData(profile)
+            cleanAvatarForm()
+            closePopup(avatarPopup)
+        })
+        .catch(console.error)
+        .finally(() => setButtonText(avatarSaveButton))
 }
 
 export function openNewPlacePopup() {
     cleanNewPlaceForm()
-    resetEditForm(newPlaceForm)
+    resetValidation(newPlaceForm)
     openPopup(popupNewPlace)
 }
 
 function handleNewPlaceSubmit(evt) {
     evt.preventDefault()
-    saveTextCard()
-    addCard(getNewCardData())
-    closePopup(popupNewPlace)
-    cleanNewPlaceForm()
+    setButtonText(cardSaveButton, 'Cохранение...')
+    api.uploadCard(getNewCardData())
+        .then((res) => {
+            addCard(res)
+            closePopup(popupNewPlace)
+            cleanNewPlaceForm()
+        })
+        .catch(console.error)
+        .finally(() => setButtonText(cardSaveButton))
 }
 
 export function setModalsEventListeners() {

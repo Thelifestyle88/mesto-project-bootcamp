@@ -1,9 +1,8 @@
-import { toggleLike, uploadCard } from './api.js';
+import { api } from './api.js';
 import { openViewModal, openDeleteCardConfirm } from './modal.js'
 import { addCardToContainer } from './container.js';
 
 const element = document.querySelector('#element').content
-const cardSaveButton = document.querySelector('.popup__form-submit-create')
 
 function handleImageClick(evt) {
     const { target: { src, alt } } = evt;
@@ -14,7 +13,7 @@ function handleImageClick(evt) {
 function handleLikeClick(evt) {
     const card = evt.target.closest('.element')
     const likesCount = card.querySelector('.element__likes-count')
-    toggleLike(card._id, card._likes.includes(card._userId))
+    api.toggleLike(card.id, card._likes.includes(card._userId))
         .then((res) => {
             card._likes = res.likes.map((item) => item._id)
             likesCount.textContent = card._likes.length
@@ -24,11 +23,12 @@ function handleLikeClick(evt) {
                 evt.target.classList.remove('element__like_black')
             }
         })
+        .catch(console.error);
 }
 
 function handleDeleteClick(evt) {
     const card = evt.target.closest('.element')
-    sessionStorage.setItem('id-to-delete', card._id)
+    sessionStorage.setItem('itemToDelete', card.id)
     openDeleteCardConfirm()
 }
 
@@ -42,8 +42,7 @@ export function makeCard(cardObj, user_id) {
     elementPhoto.src = cardObj.link
     elementPhoto.alt = cardObj.name
     const likeButton = card.querySelector('.element__like')
-    const cardId = cardObj._id
-    card._id = cardObj._id;
+    card.id = cardObj._id;
     card._userId = user_id;
     card._likes = cardObj.likes.map((item) => item._id)
     card._ownerId = cardObj.owner._id
@@ -64,9 +63,5 @@ export function makeCard(cardObj, user_id) {
 
 
 export function addCard(card) {
-    uploadCard(card)
-        .then((res) => {
-            addCardToContainer(makeCard(res, sessionStorage.getItem("userId")))
-        })
-        .finally(() => cardSaveButton.textContent = 'Создать')
+    addCardToContainer(makeCard(card, sessionStorage.getItem("userId")))
 }
